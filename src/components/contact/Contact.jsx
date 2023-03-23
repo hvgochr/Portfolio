@@ -20,10 +20,30 @@ function handleSubmit(event) {
   };
 
   emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-    .then((response) => {
-      console.log('Email sent successfully!');
-    }, (error) => {
-      console.log('Email failed to send:', error);
+    .then(() => {
+      const button = document.getElementById('contact__button');
+      const svg = button.querySelector('.button__icon');
+      button.innerText = "Message sent!";
+      button.style.backgroundColor = "Green";
+      button.disabled = true;
+      setTimeout(() => {
+        const form = document.querySelector('.contact__form');
+        form.reset();
+        button.disabled = false;
+        button.innerText = "Send Message";
+        button.appendChild(svg);
+        button.style.backgroundColor = "var(--title-color)";
+      }, 20000);
+    }, () => {
+      const button = document.getElementById('contact__button');
+      const svg = button.querySelector('.button__icon');
+      button.innerText = "Message failed to send";
+      button.style.backgroundColor = "Red";
+      setTimeout(() => {
+        button.innerText = "Send Message";
+        button.appendChild(svg);
+        button.style.backgroundColor = "var(--title-color)";
+      }, 2000);
     });
 }
 
@@ -56,16 +76,16 @@ const Contact = () => {
             </div>
 
             <div className="contact__card">
-              <i className="bx bxl-whatsapp contact__card-icon"></i>
+              <i className="bx bxl-twitter contact__card-icon"></i>
 
-              <h3 className="contact__card-title">Phone</h3>
-              <span className="contact__card-data">+33 6 88 01 02 32</span>
+              <h3 className="contact__card-title">Twitter</h3>
+              <span className="contact__card-data">@Hugochr__</span>
 
               <a
-                href=""
+                href="https://twitter.com/messages/compose?recipient_id=2617038066"
                 className="contact__button" target="_blank" rel="noreferrer"
               >
-                Text me
+                DM me
                 <i className="bx bx-right-arrow-alt contact__button-icon"></i>
               </a>
             </div>
@@ -105,7 +125,7 @@ const Contact = () => {
                 placeholder="Enter your query/request here"
               ></textarea>
             </div>
-            <button className="button button--flex">
+            <button id="contact__button" className="button button--flex">
               Send Message
               <svg
                 className="button__icon"

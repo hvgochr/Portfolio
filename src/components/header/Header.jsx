@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../../assets/logo.png";
 import "./header.css";
 
 const Header = () => {
@@ -14,12 +15,14 @@ const Header = () => {
     return (
         <header className="header">
             <nav className="nav container">
-                <a href="/#" className="nav__logo">Hugo</a>
+                <a href="/#" className="nav__logo">
+                    <img className="logo" src={logo} alt="logo"/>
+                </a>
                 <div className={Toggle?"nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
                         <li className="nav__item">
                             <a href="/#home" onClick={() => setActiveNav("#home")} className={activeNav === "#home" ? "nav__link active-link" : "nav__link"}>
-                                <i className="uil uil-estate nav__icon"/> Home
+                                <i className="uil uil-home nav__icon"/> Home
                             </a>
                         </li>
                         <li className="nav__item">
@@ -52,6 +55,5 @@ const Header = () => {
         </header>
     );
 };
-
 
 export default Header;
