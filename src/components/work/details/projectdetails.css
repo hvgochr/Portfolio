@@ -1,0 +1,121 @@
+.project__title {
+    font-size: 2.6rem;
+    color: var(--title-color);
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+}
+
+.content {
+    padding: 0 4rem 0 4rem;
+}
+
+.text__content {
+    text-align: center;
+    padding: 0 10rem 0 10rem;
+    line-height: 1.7rem;
+}
+
+.description__container,
+.objectives__container,
+.process__container,
+.results__container,
+.images__container,
+.links__container {
+    padding-bottom: 4rem;
+}
+
+.list__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list__item {
+    padding: 1rem 0 1rem 0;
+}
+
+
+.images__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.img__phone {
+    padding: 0;
+    height: 460px;
+    width: auto;
+    padding-right: 3rem;
+}
+
+.img__desktop {
+    padding: 0;
+    height: 460px;
+    width: auto;
+}
+
+.links__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem 0 4rem;
+}
+
+.link{
+    padding: 2rem 0rem 2rem 0rem;
+    text-decoration: none;
+    color: var(--title-color);
+}
+
+.link:hover{
+    font-weight: 600;
+}
+
+@media screen and (max-width: 992px) {
+    .images__content{
+        flex-direction: column;
+    }
+    .img__phone{
+        padding-right: 0;
+        padding-bottom: 3rem;
+    }
+    .img__desktop{
+        height: 410px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .img__desktop{
+        height: 370px;
+    }
+    .img__phone{
+        height: 410px;
+    }
+    .text__content {
+        padding: 0 5rem 0 5rem;
+        line-height: 1.5rem;
+    }
+    .list__content{
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .img__desktop{
+        height: 190px;
+    }
+    .img__phone{
+        height: 310px;
+    }
+    .text__content {
+        padding: 0 1rem 0 1rem;
+        line-height: 1.3rem;
+    }
+    .list__content{
+        padding: 0 1rem 0 1rem;
+        text-align: center;
+    }
+}
