@@ -2,9 +2,9 @@ import React from 'react';
 import "./contact.css";
 import emailjs from 'emailjs-com';
 
-const SERVICE_ID = 'service_x7nrwjm';
-const TEMPLATE_ID = 'template_df47p9m';
-const USER_ID = 'YhNR1c4D2u_-FZqKa';
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const USER_ID = process.env.REACT_APP_EMAILJS_USER_ID;
 
 emailjs.init(USER_ID);
 

@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./about.css";
 import AboutImg from "../../assets/profile.png";
 import CV from "../../assets/CV_EN.pdf";
 
 const About = () => {
+  const [age, setAge] = useState(0);
+
+  useEffect(() => {
+    const dateOfBirth = new Date("2001-11-30");
+    const today = new Date();
+    const ageDiff = today.getFullYear() - dateOfBirth.getFullYear();
+
+    today.getMonth() < dateOfBirth.getMonth() || (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate()) ?
+      setAge(ageDiff - 1):
+      setAge(ageDiff);
+  }, []);
+
   return (
     <section className="about section" id="about">
       <h2 className="project__title"> About Me</h2>
       <span className="section__subtitle">Who am I?</span>
       <div className="about__container container grid">
         <img src={AboutImg} alt="" className="about__img" />
-        <div className="about__data"> 
+        <div className="about__data">
           <p className="about__description">
-            I’m a 21 years old computer science student. Currently in my second year at the Montpellier UIT.
+            I’m a {age} years old computer science student. Currently in my third year at the Montpellier UIT.
             Former architecture student, I moved into the computer science field because I was curious about task automation, but I didn’t have any knowledge in that field.
             I was able to learn some programming languages and to carry out some projects, through my classes or alone at home.
             Outside of coding, I like football, running, cycling and going out with friends.
