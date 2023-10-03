@@ -106,6 +106,26 @@ const Qualifications = () => {
                 : "qualification__content"
             }
           >
+
+            <div className="qualification__data">
+              <div>
+                <h3 className="qualification__title">
+                  Seasonal employment in a fast food restaurant
+                </h3>
+                <span className="qualification__subtitle">
+                  Taking orders and serving customers
+                </span>
+                <div className="qualification__calendar">
+                  <i className="uil uil-calendar-alt"></i> Summer 2017 - 2019
+                </div>
+              </div>
+
+              <div>
+                <span className="qualification__rounder"></span>
+                <span className="qualification__line"></span>
+              </div>
+            </div>
+
             <div className="qualification__data">
               <div></div>
 
@@ -144,6 +164,7 @@ const Qualifications = () => {
                 <span className="qualification__line"></span>
               </div>
             </div>
+
             <div className="qualification__data">
               <div></div>
 
@@ -153,13 +174,13 @@ const Qualifications = () => {
               </div>
               <div>
                 <h3 className="qualification__title">
-                  Computer Science Internship
+                  Computer Science Internship and Apprenticeship
                 </h3>
                 <span className="qualification__subtitle">
                   BM Services
                 </span>
                 <div className="qualification__calendar">
-                  <i className="uil uil-calendar-alt"></i> 2023
+                  <i className="uil uil-calendar-alt"></i> 2023 - 2024
                 </div>
               </div>
             </div>
