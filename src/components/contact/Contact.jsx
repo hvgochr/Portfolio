@@ -1,3 +1,6 @@
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from 'react';
 import "./contact.css";
 import emailjs from 'emailjs-com';
@@ -8,46 +11,40 @@ const USER_ID = process.env.REACT_APP_EMAILJS_USER_ID;
 
 emailjs.init(USER_ID);
 
-function handleSubmit(event) {
-  event.preventDefault();
-
-  const { name, email, message } = event.target.elements;
-
-  const templateParams = {
-    from_name: name.value,
-    from_email: email.value,
-    message: message.value,
-  };
-
-  emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-    .then(() => {
-      const button = document.getElementById('contact__button');
-      const svg = button.querySelector('.button__icon');
-      button.innerText = "Message sent!";
-      button.style.backgroundColor = "Green";
-      button.disabled = true;
-      setTimeout(() => {
-        const form = document.querySelector('.contact__form');
-        form.reset();
-        button.disabled = false;
-        button.innerText = "Send Message";
-        button.appendChild(svg);
-        button.style.backgroundColor = "var(--title-color)";
-      }, 20000);
-    }, () => {
-      const button = document.getElementById('contact__button');
-      const svg = button.querySelector('.button__icon');
-      button.innerText = "Message failed to send";
-      button.style.backgroundColor = "Red";
-      setTimeout(() => {
-        button.innerText = "Send Message";
-        button.appendChild(svg);
-        button.style.backgroundColor = "var(--title-color)";
-      }, 2000);
-    });
-}
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 characters long')
+    .max(25, 'Name must be at most 25 characters long')
+    .nonempty('Name is required'),
+  email: z
+    .string()
+    .email('Invalid email address')
+    .nonempty('Email is required'),
+  message: z
+    .string()
+    .min(10, 'Message must be at least 10 characters long')
+    .max(500, 'Message must be at most 500 characters long')
+    .nonempty('Message is required'),
+});
 
 const Contact = () => {
+  const {
+    register, 
+    handleSubmit, 
+    formState: {errors},
+  } = useForm({resolver: zodResolver(contactSchema)});
+
+  const onSubmit = (data) => {
+    console.log(data);
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+  };
+
   return (
     <section className="contact section" id="contact">
       <h2 className="section__title">Get in Touch</h2>
@@ -95,15 +92,19 @@ const Contact = () => {
 
         <div className="contact__content">
           <h3 className="contact__title">Write me !</h3>
-          <form className="contact__form" onSubmit={handleSubmit}>
+          <form className="contact__form" onSubmit={handleSubmit(onSubmit)}>
             <div className="contact__form-div">
               <label className="contact__form-tag">Name</label>
               <input
-                type="name"
+                type="text"
                 name="name"
                 className="contact__form-input"
                 placeholder="Enter your name"
+                {...register('name')}
               />
+              {errors.name && (
+                <div className="contact__form-error">{errors.name.message}</div>
+              )}
             </div>
             <div className="contact__form-div">
               <label className="contact__form-tag">E-mail</label>
@@ -112,7 +113,11 @@ const Contact = () => {
                 name="email"
                 className="contact__form-input"
                 placeholder="Insert your email"
+                {...register('email')}
               />
+              {errors.email && (
+                <div className="contact__form-error">{errors.email.message}</div>
+              )}
             </div>
 
             <div className="contact__form-div contact__form-area">
@@ -123,7 +128,11 @@ const Contact = () => {
                 rows="10"
                 className="contact__form-input"
                 placeholder="Enter your query/request here"
+                {...register('message')}
               ></textarea>
+              {errors.message && (
+                <div className="contact__form-error">{errors.message.message}</div>
+              )}
             </div>
             <button id="contact__button" className="button button--flex">
               Send Message
