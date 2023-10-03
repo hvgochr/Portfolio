@@ -107,6 +107,14 @@
     resize: none;
 }
 
+.contact__form-error {
+    position: absolute;
+    bottom: -1.2rem;
+    left: 1.2rem;
+    font-size: var(--smaller-font-size);
+    color: var(--text-error-color);
+}
+
 @media screen and (max-width: 992px) {
     .contact__container {
         column-gap: 3rem;
